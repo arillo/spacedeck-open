@@ -26,6 +26,7 @@
     "gm": "^1.23.1",
     "helmet": "^3.5.0",
     "i18n-2": "0.6.3",
+    "ldap-authentication": "^2.2.6",
     "log-timestamp": "latest",
     "mock-aws-s3": "^2.6.0",
     "moment": "^2.19.3",

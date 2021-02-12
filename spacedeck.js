@@ -30,6 +30,30 @@ process.env['OPENSSL_CONF'] = '/dev/null';
 
 console.log("Booting Spacedeck Open… (environment: " + app.get('env') + ")");
 
+
+const { authenticate } = require('ldap-authentication')
+ 
+async function auth() { 
+  // auth with regular user
+  let options = {
+    ldapOpts: {
+      url: 'ldaps://ldap.universe.io',
+      tlsOptions: { rejectUnauthorized: false }
+    },
+    userDn: 'uid=dm,cn=users,dc=ldap,dc=universe,dc=io',
+    userPassword: 'AUt6iG&V5BtL!V',
+    userSearchBase: 'dc=ldap,dc=universe,dc=io',
+    usernameAttribute: 'uid',
+    username: 'dm',
+    // starttls: false
+  }
+ 
+  const user = await authenticate(options)
+  console.log(user)
+}
+ 
+auth()
+
 app.use(logger(isProduction ? 'combined' : 'dev'));
 
 i18n.expressBind(app, {
