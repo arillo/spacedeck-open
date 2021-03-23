@@ -57,7 +57,7 @@ auth()
 app.use(logger(isProduction ? 'combined' : 'dev'));
 
 i18n.expressBind(app, {
-  locales: ["en", "de", "fr", "oc", "es"],
+  locales: ["en", "de", "fr", "oc", "es", "hu"],
   defaultLocale: "en",
   cookieName: "spacedeck_locale",
   devMode: (app.get('env') == 'development')
