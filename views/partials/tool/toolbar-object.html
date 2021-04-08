@@ -97,6 +97,11 @@
 
     <button class="btn btn-divider"></button>
 
+    <button class="btn btn-transparent btn-icon-labeled" v-on:click="paste_in_place()" title="<%=__("paste_in_place")%>">
+      <span class="icon icon-clipboard"></span>
+      <span class="icon-label"><%=__("paste_in_place")%></span>
+    </button>
+
     <div class="dropdown bottom light center">
       <div class="btn-collapse" v-bind:class="{in:selection_metrics.contains_text}">
         <button
@@ -109,10 +114,12 @@
     </div>
 
     <div class="dropdown top light right" v-bind:class="{open:opened_dialog=='object-options'}">
-      <button class="btn btn-transparent btn-icon-labeled" v-on:click="open_dialog('object-options')" v-bind:class="{open : opened_dialog=='object-options'}">
-        <span class="icon icon-cogwheel"></span>
-        <span class="icon-label"><%=__("more")%></span>
-      </button>
+      <div class="btn-collapse" v-bind:class="{in:selection_metrics.contains_text}">
+        <button class="btn btn-transparent btn-icon-labeled" v-on:click="open_dialog('object-options')" v-bind:class="{open:opened_dialog=='object-options'}">
+          <span class="icon icon-cogwheel"></span>
+          <span class="icon-label"><%=__("more")%></span>
+        </button>
+      </div>
 
       <div class="dialog no-min-w">
         <%- include("./object-options.html") %>

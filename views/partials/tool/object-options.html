@@ -17,8 +17,13 @@
       <span class="icon-label"><%=__("unlock")%></span>
     </button>
 
-    <button class="btn btn-transparent btn-icon-labeled" v-on:click="duplicate_selected_artifacts()" title="<%=__("copy")%>">
+    <button class="btn btn-transparent btn-icon-labeled" v-on:click="duplicate_selected_artifacts()" title="<%=__("duplicate")%>">
       <span class="icon icon-duplicate"></span>
+      <span class="icon-label"><%=__("duplicate")%></span>
+    </button>
+
+    <button class="btn btn-transparent btn-icon-labeled" v-on:click="copy_selected_artifacts()" title="<%=__("copy")%>">
+      <span class="icon icon-bookmark"></span>
       <span class="icon-label"><%=__("copy")%></span>
     </button>
 

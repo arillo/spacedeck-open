@@ -2185,10 +2185,33 @@ var SpacedeckSections = {
 
     duplicate_selected_artifacts: function() {
       var arts = this.selected_artifacts();
+      this.deselect()
       for (var i=0; i<arts.length; i++) {
         var a = arts[i];
-        var cloned = this.clone_artifact(a,50,50);
+        this.clone_artifact(a, 75,75, function(ca) {
+          this.multi_select([ca]);
+        }.bind(this));
       }
+    },
+
+    copy_selected_artifacts: function() {
+      navigator.clipboard.writeText(JSON.stringify(this.selected_artifacts()))
+        .then(function() {
+        /* clipboard successfully set */
+        }, function() {
+        /* clipboard write failed */
+        });
+    },
+
+    paste_in_place: function() {
+      navigator.clipboard.readText()
+      .then(text => {
+        /* clipboard successfully read */
+        this.insert_embedded_artifact(text);
+      })
+      .catch(err => {
+        /* clipboard read failed */
+      });
     },
 
     copy_selected_artifacts_to_clipboard: function() {
@@ -2278,10 +2301,10 @@ var SpacedeckSections = {
 
       if (!pastedText) return;
 
-      this.insert_embedded_artifact(pastedText);
+      this.insert_embedded_artifact(pastedText, true);
     },
 
-    insert_embedded_artifact: function(text) {
+    insert_embedded_artifact: function(text, offset) {
       var space = this.active_space;
       if (!space) return;
 
@@ -2296,7 +2319,7 @@ var SpacedeckSections = {
           for (var i=0; i<parsed.length; i++) {
             if (parsed[i].mime) {
               var z = this.highest_z()+1;
-              if(!this.isShift) {
+              if(offset) {
                 if (parsed.length==1) {
                   var w = parsed[i].w;
                   var h = parsed[i].h;
@@ -2305,8 +2328,8 @@ var SpacedeckSections = {
                   parsed[i].y = point.y;
                   parsed[i].z = point.z;
                 } else {
-                  parsed[i].x = parsed[i].x+100;
-                  parsed[i].y = parsed[i].y+100;
+                  parsed[i].x = parsed[i].x+75;
+                  parsed[i].y = parsed[i].y+75;
                   parsed[i].y = parsed[i].z+z;
                 }
               }
