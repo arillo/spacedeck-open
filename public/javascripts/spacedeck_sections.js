@@ -2816,7 +2816,7 @@ var SpacedeckSections = {
       if (!this.viewport_zoom) this.viewport_zoom = 1;
       var old_zoom = this.viewport_zoom;
 
-      this.viewport_zoom *= 1.5;
+      this.viewport_zoom += 0.25;
       if (this.viewport_zoom>=2) {
         this.viewport_zoom = 2;
       }
@@ -2830,7 +2830,7 @@ var SpacedeckSections = {
       if (!this.viewport_zoom) this.viewport_zoom = 1;
       var old_zoom = this.viewport_zoom;
 
-      this.viewport_zoom /= 1.5;
+      this.viewport_zoom -= 0.25;
       if (this.viewport_zoom<0.05) {
         this.viewport_zoom = 0.05;
       }
