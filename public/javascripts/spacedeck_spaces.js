@@ -506,6 +506,7 @@ var SpacedeckSpaces = {
     },
 
     duplicate_space: function(space) {
+      this.close_dropdown();
       duplicate_space(space, null, function(new_space) {
         //alert("Space duplicated.");
         this.active_folder.children.push(new_space);
