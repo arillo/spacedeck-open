@@ -304,7 +304,7 @@
 	"sharing": "sharing",
 	"list": "Liste",
 	"download_space": "Space Herunterladen",
-	"download_as_pdf": "Space als PDF herunterladen",
+	"download_as_pdf": "PDF herunterladen",
 	"duplicate_destination_folder": "Zielordner für Duplikat",
 	"type": "Typ",
 	"promote": "Befördern",
@@ -321,5 +321,6 @@
 	"mute_present": "Entfolgen",
 	"follow_present_help": "Wenn jemand den Space präsentiert, folgen die anderen Mitglieder automatisch der Präsentation. Mit diesem Knopf lässt sich das an- oder ausschalten.",
 	"media": "Media",
-	"tool_edit_text": "Text bearbeiten"
+	"tool_edit_text": "Text bearbeiten",
+	"paste_in_place": "Einfügen"
 }

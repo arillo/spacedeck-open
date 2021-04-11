@@ -342,6 +342,49 @@ router.post('/:id/background', function(req, res, next) {
   });
 });
 
+var duplicateSpace = (space, user) => {
+  return new Promise((resolve, reject) => {
+    var newSpace = _.clone(space.dataValues);
+    newSpace.name = newSpace.name + " (duplicate)";
+    newSpace.edit_hash = crypto.randomBytes(64).toString('hex').substring(0, 7);
+    newSpace.creator = user;
+    newSpace.created_at = new Date();
+    newSpace.updated_at = new Date();
+    delete newSpace._id;
+    newSpace._id = uuidv4();
+
+    db.Space.create(newSpace).then(createdSpace => {
+      db.Artifact.findAll({
+        where: { space_id: space._id }
+      }).then((artifacts) => {
+        async.eachLimit(artifacts, 20, function(a, innerCb) {
+          var newArtifact = _.clone(a.dataValues);
+          newArtifact.space_id = createdSpace._id;
+          newArtifact.created_at = new Date();
+          newArtifact.updated_at = new Date();
+          delete newArtifact._id;
+          newArtifact._id = uuidv4();
+          console.log('create artifact', newArtifact);
+          db.Artifact.create(newArtifact).then(() => {
+            innerCb(null, newArtifact);
+          });
+        });
+        resolve(createdSpace);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  });
+}
+
+router.post('/:id/duplicate', (req, res, next) => {
+  duplicateSpace(req.space, req.user).then((newSpace) => {
+    res.status(201).json(newSpace);
+  }).catch((err) => {
+    res.status(400).json(err);
+  });
+});
+
 router.delete('/:id', function(req, res, next) {
   if (req.user) {
     const space = req.space;

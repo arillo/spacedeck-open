@@ -309,7 +309,7 @@
 	"list": "Export List",
 	"link": "Link",
 	"download_space": "Download Space",
-	"download_as_pdf": "Download Space as PDF",
+	"download_as_pdf": "Download as PDF",
 	"type": "Type",
 	"download": "Download",
 	"Previous Zone": "Previous Zone",
